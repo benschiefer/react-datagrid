@@ -13663,7 +13663,7 @@ return /******/ (function(modules) { // webpackBootstrap
 
 	            var diff = config.diff.left;
 	            var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName);
-	            var nextColumn = diff > 0 ? columns[index + 1] : null;
+	            var nextColumn = index < columns.length - 1 ? columns[index + 1] : null;
 
 	            var columnSize = Region.from(columnHeaders[index]).width;
 	            var nextColumnSize;
