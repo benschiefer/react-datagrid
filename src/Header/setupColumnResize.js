@@ -41,7 +41,7 @@ module.exports = function(header, props, column, event){
 
             var diff = config.diff.left
             var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName)
-            var nextColumn    = diff > 0
+            var nextColumn    = index < columns.length - 1
                                     ? columns[index + 1]
                                     : null;
 
