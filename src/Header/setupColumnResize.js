@@ -41,19 +41,19 @@ module.exports = function(header, props, column, event){
 
             var diff = config.diff.left
             var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName)
-            var nextColumn    = diff > 0?
-                                    null:
-                                    columns[index + 1]
+            var nextColumn    = diff > 0
+                                    ? columns[index + 1]
+                                    : null;
 
             var columnSize = Region.from(columnHeaders[index]).width
             var nextColumnSize
             var firstSize  = columnSize + diff
             var secondSize = 0
 
-            // if (firstSize < column.minWidth){
-            //     firstSize = column.minWidth
-            //     diff = firstSize - columnSize
-            // }
+             if (firstSize < column.minWidth){
+                 firstSize = column.minWidth;
+                 diff = firstSize - columnSize;
+             }
 
             if (nextColumn){
                 nextColumnSize = nextColumn?
@@ -64,11 +64,11 @@ module.exports = function(header, props, column, event){
 
             }
 
-            // if (nextColumn && secondSize < nextColumn.minWidth){
-            //     secondSize = nextColumn.minWidth
-            //     diff = nextColumnSize - secondSize
-            //     firstSize = columnSize + diff
-            // }
+             if (nextColumn && secondSize < nextColumn.minWidth){
+                 secondSize = nextColumn.minWidth;
+                 diff = nextColumnSize - secondSize;
+                 firstSize = columnSize + diff;
+             }
 
             var resizeInfo = [{
                 name: column.name,
