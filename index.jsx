@@ -111,11 +111,11 @@ var App = React.createClass({
     },
 
     onColumnResize: function(firstCol, firstSize, secondCol, secondSize){
-        firstCol.width = firstCol.minWidth = firstSize
+        firstCol.width = firstSize;
 
-        // if (secondCol){
-        //     secondCol.width = secondCol.minWidth = secondSize
-        // }
+         if (secondCol){
+             secondCol.width = secondSize;
+         }
 
         this.setState({})
     },
