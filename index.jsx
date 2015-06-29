@@ -50,7 +50,8 @@ var columns = [
             color: 'red',
             textAlign: 'right'
         },
-        width: 150
+        width: 150,
+        cellPadding: '20px'
     },
     {
         name: 'id',
