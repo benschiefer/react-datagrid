@@ -13434,11 +13434,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var column = columns ? columns[index] : null;
 	        var className = props.className || '';
 	        var textAlign = column && column.textAlign;
+	        var textPadding = column.cellPadding || props.textPadding;
 	        var text = props.renderText ? props.renderText(props.text, column, props.rowIndex) : props.text;
 
 	        var textCellProps = {
 	            className: 'z-text',
-	            style: { padding: props.textPadding, margin: 'auto 0' }
+	            style: { padding: textPadding, margin: 'auto 0' }
 	        };
 
 	        var textCell = props.renderCell ? props.renderCell(textCellProps, text, props) : React.DOM.div(textCellProps, text);
