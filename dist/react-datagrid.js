@@ -13434,7 +13434,7 @@ return /******/ (function(modules) { // webpackBootstrap
 	        var column = columns ? columns[index] : null;
 	        var className = props.className || '';
 	        var textAlign = column && column.textAlign;
-	        var textPadding = column.cellPadding || props.textPadding;
+	        var textPadding = typeof props.rowIndex !== 'undefined' && column.cellPadding || props.textPadding;
 	        var text = props.renderText ? props.renderText(props.text, column, props.rowIndex) : props.text;
 
 	        var textCellProps = {
