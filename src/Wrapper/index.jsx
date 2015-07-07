@@ -91,6 +91,8 @@ module.exports = React.createClass({
             emptyPixels = this.props.style.height - (rowsCount * this.props.rowHeight);
             numEmptyRows = Math.ceil(emptyPixels/this.props.rowHeight);
 
+            console.log(emptyPixels, numEmptyRows);
+
             for( var i = 0; i < numEmptyRows; i++ ){
                 emptyCells = [];
                 rowClass = null;
