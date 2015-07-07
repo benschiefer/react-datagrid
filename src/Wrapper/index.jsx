@@ -40,7 +40,7 @@ module.exports = React.createClass({
 
         var content = props.empty?
             <div className="z-empty-text" style={props.emptyTextStyle}>{props.emptyText}</div>:
-            <div {...props.tableProps} ref="table"/>
+            <div {...props.tableProps} ref="table">{this.fillEmptyRows()}</div>
 
 
         return <Scroller
@@ -78,6 +78,50 @@ module.exports = React.createClass({
 
     onVerticalScroll: function(pos){
         this.props.onScrollTop(pos)
+    },
+
+    fillEmptyRows: function(){
+        var emptyPixels = 0;
+        var numEmptyRows = 0;
+        var emptyRows = [];
+        var emptyCells = [];
+        var rowClass, cellClass, cellWidth;
+
+        if ( this.props.style.height > rowsCount * this.props.rowHeight ) {
+            emptyPixels = this.props.style.height - (rowsCount * this.props.rowHeight);
+            numEmptyRows = Math.ceil(emptyPixels/this.props.rowHeight);
+
+            for( var i = 0; i < numEmptyRows; i++ ){
+                emptyCells = [];
+                rowClass = null;
+
+                rowClass = i % 2 ? 'z-even z-row' : 'z-odd z-row';
+
+                for ( var j = 0; j < this.props.columns.length; j++ ) {
+                    cellClass = null;
+
+                    if ( j ) {
+                        cellClass = j === this.props.columns.length - 1 ? 'z-last z-cell' : 'z-cell';
+                    } else {
+                        cellClass = 'z-first z-cell';
+                    }
+
+                    cellWidth = this.props.columns[j].width ? {width: this.props.columns[j].width} : {minWidth: this.props.columns[j].minWidth, flex: 1};
+
+                    emptyCells.push(
+                        <div className={cellClass} style={cellWidth} />
+                    );
+                }
+
+                emptyRows.push(
+                    <div className={rowClass} style={height: props.rowHeight}>
+                        {emptyCells}
+                    </div>
+                );
+            }
+        }
+
+        return emptyRows;
     },
 
     prepareProps: function(thisProps){
