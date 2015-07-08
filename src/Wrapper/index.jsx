@@ -38,10 +38,20 @@ module.exports = React.createClass({
         // var loadersSize = props.loadersSize
         var verticalScrollerSize = (props.totalLength + groupsCount) * props.rowHeight// + loadersSize
 
-        var content = props.empty?
-            <div className="z-empty-text" style={props.emptyTextStyle}>{props.emptyText}</div>:
-            <div {...props.tableProps} ref="table">{this.fillEmptyRows()}</div>
-
+        // determine to render empty text, empty rows or data
+        var content;
+        if ( props.empty && props.fillEmptyRows ) {
+            content = <div {...props.tableProps} ref="table">{this.fillEmptyRows()}</div>;
+        }
+        else if ( props.empty ) {
+            content = <div className="z-empty-text" style={props.emptyTextStyle}>{props.emptyText}</div>;
+        }
+        else if ( props.fillEmptyRows ) {
+            content = <div {...props.tableProps} ref="table"></div>
+            content.props.children = content.props.children.concat(this.fillEmptyRows());
+        } else {
+            content = <div {...props.tableProps} ref="table"></div>;
+        }
 
         return <Scroller
                 ref="scroller"
@@ -85,7 +95,7 @@ module.exports = React.createClass({
         var numEmptyRows = 0;
         var emptyRows = [];
         var emptyCells = [];
-        var rowClass, cellClass, cellWidth, rowHeight;
+        var rowClass, cellClass, cellWidth, rowHeight, offset;
 
         if ( this.props.style.height > this.props.renderCount * this.props.rowHeight ) {
             emptyPixels = this.props.style.height - (this.props.renderCount * this.props.rowHeight);
@@ -93,18 +103,20 @@ module.exports = React.createClass({
 
             for( var i = 0; i < numEmptyRows; i++ ){
                 emptyCells = [];
-                rowClass = null;
+                rowClass = 'z-row';
+                offset = (this.props.renderCount - 1) + i;
 
-                rowClass = i % 2 ? 'z-even z-row' : 'z-odd z-row';
-                rowHeight = {height: this.props.rowHeight}
+                rowClass += (offset % 2 ? ' z-odd' : ' z-even');
+                rowHeight = { height: this.props.rowHeight }
 
                 for ( var j = 0; j < this.props.columns.length; j++ ) {
-                    cellClass = null;
+                    cellClass = 'z-cell';
 
-                    if ( j ) {
-                        cellClass = j === this.props.columns.length - 1 ? 'z-last z-cell' : 'z-cell';
-                    } else {
-                        cellClass = 'z-first z-cell';
+                    if ( j === 0 ) {
+                        cellClass += ' z-first';
+                    }
+                    if ( j === this.props.columns.length - 1 ) {
+                        cellClass += ' z-last';
                     }
 
                     cellWidth = this.props.columns[j].width ? {width: this.props.columns[j].width} : {minWidth: this.props.columns[j].minWidth, flex: 1};
