@@ -85,19 +85,18 @@ module.exports = React.createClass({
         var numEmptyRows = 0;
         var emptyRows = [];
         var emptyCells = [];
-        var rowClass, cellClass, cellWidth;
+        var rowClass, cellClass, cellWidth, rowHeight;
 
-        if ( this.props.style.height > rowsCount * this.props.rowHeight ) {
-            emptyPixels = this.props.style.height - (rowsCount * this.props.rowHeight);
+        if ( this.props.style.height > this.props.renderCount * this.props.rowHeight ) {
+            emptyPixels = this.props.style.height - (this.props.renderCount * this.props.rowHeight);
             numEmptyRows = Math.ceil(emptyPixels/this.props.rowHeight);
-
-            console.log(emptyPixels, numEmptyRows);
 
             for( var i = 0; i < numEmptyRows; i++ ){
                 emptyCells = [];
                 rowClass = null;
 
                 rowClass = i % 2 ? 'z-even z-row' : 'z-odd z-row';
+                rowHeight = {height: this.props.rowHeight}
 
                 for ( var j = 0; j < this.props.columns.length; j++ ) {
                     cellClass = null;
@@ -116,7 +115,7 @@ module.exports = React.createClass({
                 }
 
                 emptyRows.push(
-                    <div className={rowClass} style={height: props.rowHeight}>
+                    <div className={rowClass} style={rowHeight}>
                         {emptyCells}
                     </div>
                 );
