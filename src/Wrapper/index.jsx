@@ -23,6 +23,19 @@ module.exports = React.createClass({
         }
     },
 
+    getInitialState: function(){
+        return {}
+    },
+
+    componentDidMount: function(){
+        this.setState({height: this.getDOMNode().offsetHeight});
+        window.addEventListener('resize', this._handleResize);
+    },
+
+    componentWillUnmount: function(){
+        window.removeEventListener('resize', this._handleResize);
+    },
+
     render: function() {
 
         var props     = this.prepareProps(this.props)
@@ -95,10 +108,11 @@ module.exports = React.createClass({
         var numEmptyRows = 0;
         var emptyRows = [];
         var emptyCells = [];
+        var height = this.state.height !== 0 && this.state.height;
         var rowClass, cellClass, cellWidth, rowHeight, offset;
 
-        if ( this.props.style.height > this.props.renderCount * this.props.rowHeight ) {
-            emptyPixels = this.props.style.height - (this.props.renderCount * this.props.rowHeight);
+        if ( height > this.props.renderCount * this.props.rowHeight ) {
+            emptyPixels = height - ((this.props.renderCount - 1) * this.props.rowHeight);
             numEmptyRows = Math.ceil(emptyPixels/this.props.rowHeight);
 
             for( var i = 0; i < numEmptyRows; i++ ){
@@ -143,5 +157,9 @@ module.exports = React.createClass({
         assign(props, thisProps)
 
         return props
+    },
+
+    _handleResize: function() {
+        this.setState({height: this.getDOMNode().offsetHeight});
     }
 })
