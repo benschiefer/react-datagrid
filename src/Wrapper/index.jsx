@@ -121,7 +121,7 @@ module.exports = React.createClass({
                 offset = (this.props.renderCount - 1) + i;
 
                 rowClass += (offset % 2 ? ' z-odd' : ' z-even');
-                rowHeight = { height: this.props.rowHeight }
+                rowHeight = { height: this.props.rowHeight };
 
                 for ( var j = 0; j < this.props.columns.length; j++ ) {
                     cellClass = 'z-cell';
@@ -133,7 +133,7 @@ module.exports = React.createClass({
                         cellClass += ' z-last';
                     }
 
-                    cellWidth = this.props.columns[j].width ? {width: this.props.columns[j].width} : {minWidth: this.props.columns[j].minWidth, flex: 1};
+                    cellWidth = this.props.columns[j].width ? {width: this.props.columns[j].width, minWidth: this.props.columns[j].width} : {minWidth: this.props.columns[j].minWidth, WebkitFlex: 1, msFlex: 1, flex: 1};
 
                     emptyCells.push(
                         <div className={cellClass} style={cellWidth} />
