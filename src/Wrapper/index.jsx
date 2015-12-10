@@ -60,8 +60,7 @@ module.exports = React.createClass({
             content = <div className="z-empty-text" style={props.emptyTextStyle}>{props.emptyText}</div>;
         }
         else if ( props.fillEmptyRows ) {
-            content = <div {...props.tableProps} ref="table"></div>
-            content.props.children = content.props.children.concat(this.fillEmptyRows());
+            content = <div {...props.tableProps} children={props.tableProps.children.concat(this.fillEmptyRows())} ref="table"></div>
         } else {
             content = <div {...props.tableProps} ref="table"></div>;
         }
