@@ -140,7 +140,7 @@ module.exports = React.createClass({
                 }
 
                 emptyRows.push(
-                    <div className={rowClass} style={rowHeight}>
+                    <div className={rowClass} style={rowHeight} onClick={this._onEmptyRowClick}>
                         {emptyCells}
                     </div>
                 );
@@ -160,5 +160,11 @@ module.exports = React.createClass({
 
     _handleResize: function() {
         this.setState({height: this.getDOMNode().offsetHeight});
+    },
+
+    _onEmptyRowClick: function(e) {
+        if (typeof this.props.onRowClick === 'function') {
+            this.props.onRowClick(null, null, e); // callback params: (rowData, rowProps, event)
+        }
     }
 })
