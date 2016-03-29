@@ -116,7 +116,7 @@ module.exports = React.createClass({
 
             for( var i = 0; i < numEmptyRows; i++ ){
                 emptyCells = [];
-                rowClass = 'z-row';
+                rowClass = 'z-row z-empty-row';
                 offset = (this.props.renderCount - 1) + i;
 
                 rowClass += (offset % 2 ? ' z-odd' : ' z-even');
