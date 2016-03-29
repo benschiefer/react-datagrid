@@ -55,7 +55,7 @@ function renderGroupRow(props, groupData){
 
 function renderGroup(props, groupData){
 
-    var result = [renderGroupRow(props, groupData)]
+    var result = [typeof props.groupRowFactory === 'function' ? props.groupRowFactory(props, groupData) : renderGroupRow(props, groupData)]
 
     if (groupData && groupData.leaf){
         result.push.apply(result, renderData(props, groupData.data, groupData.depth))
