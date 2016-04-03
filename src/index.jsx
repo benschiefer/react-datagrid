@@ -526,6 +526,10 @@ module.exports = React.createClass({
                             endIndex + 1 - startIndex:
                             data.length
 
+        var totalLength = state.groupData?
+                            data.length + state.groupData.groupsCount:
+                            data.length
+
         if (props.virtualRendering){
             scrollTop = startIndex * props.rowHeight
         }
@@ -557,7 +561,7 @@ module.exports = React.createClass({
             scrollTop       : scrollTop,
             topOffset       : state.topOffset,
             startIndex      : startIndex,
-            totalLength     : data.length,
+            totalLength     : totalLength,
             renderCount     : renderCount,
             endIndex        : endIndex,
 
