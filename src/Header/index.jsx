@@ -253,6 +253,10 @@ module.exports = React.createClass({
             }
         }
 
+        if (typeof this.props.onSortChange === 'function' && typeof this.props.onCellClick === 'function' && this.props.selectCells) {
+            this.props.onCellClick(null);
+        }
+
         ;(this.props.onSortChange || emptyFn)(sortInfo)
     },
 

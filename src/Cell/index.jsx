@@ -125,7 +125,7 @@ module.exports = React.createClass({
     handleCellClick: function(){
         var cell = {
             name: this.props.name,
-            value: this.props.data[this.props.name],
+            value: this.props.data && this.props.data[this.props.name],
             columnIndex: this.props.index,
             rowIndex: this.props.rowIndex
         };
