@@ -76,6 +76,14 @@ module.exports = React.createClass({
             className += ' z-align-' + textAlign
         }
 
+        if (props.selectedCells && Array.isArray(props.selectedCells) && props.selectedCells.length){
+            for (var i = 0; i < props.selectedCells.length; i++){
+                if (props.selectedCells[i].columnIndex === props.index && props.selectedCells[i].rowIndex === props.rowIndex) {
+                    className += ' z-cell-selected';
+                }
+            }
+        }
+
         className += ' ' + props.defaultClassName
 
         var sizeStyle = column && column.sizeStyle
@@ -107,10 +115,23 @@ module.exports = React.createClass({
 
         // var c = {textCell}
         return (
-            <div {...cellProps}>
+            <div {...cellProps} onClick={this.handleCellClick}>
                 {c}
                 {props.children}
             </div>
         )
+    },
+
+    handleCellClick: function(){
+        var cell = {
+            name: this.props.name,
+            value: this.props.data && this.props.data[this.props.name],
+            columnIndex: this.props.index,
+            rowIndex: this.props.rowIndex
+        };
+
+        if (this.props.onSelectedCellChange && typeof this.props.onSelectedCellChange === 'function'){
+            this.props.onSelectedCellChange(cell);
+        }
     }
 })

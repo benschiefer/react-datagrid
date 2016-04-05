@@ -8,6 +8,7 @@ var React = require('react')
 var DataGrid = require('./src')
 var faker = window.faker = require('faker');
 var preventDefault = require('./src/utils/preventDefault')
+var dataSet = require('./data-set');
 
 var gen = (function(){
 
@@ -82,7 +83,7 @@ var ROW_HEIGHT = 31
 var LEN = 2000
 var SORT_INFO = []//[ { name: 'id', dir: 'asc'} ]
 var sort = sorty(SORT_INFO)
-var data = gen(LEN)
+var data = dataSet;
 var origData = [].concat(data)
 var PAGE_SIZE = 450
 var PAGE = 2
@@ -242,7 +243,7 @@ var App = React.createClass({
                 xpageSize={PAGE_SIZE}
                 xdata={data}
                 pageSize={PAGE_SIZE}
-                dataSource='http://5.101.99.47:8090/5000'
+                dataSource={data}
                 page={PAGE}
                 onPageSizeChange={this.onPageSizeChange}
                 onPageChange={this.onPageChange}
@@ -254,8 +255,10 @@ var App = React.createClass({
                     xshowSeparators: false
                 }}
                 onDataSourceLoaded={this.onLoaded}
-                columns={columns}/>
-
+                columns={columns}
+                xonSelectedCellChange={this.onSelectedCellChange}
+                xselectCells={true}
+                xselectedCells={this.selectedCells}/>
         </div>
     },
 
@@ -267,6 +270,15 @@ var App = React.createClass({
     onPageChange: function(value) {
         PAGE = value
         this.setState({})
+    },
+
+    onSelectedCellChange: function(cell){
+        if (cell === null){
+            this.selectedCells = [];
+            return;
+        }
+
+        this.selectedCells = [cell];
     },
 
     onPageSizeChange: function(value, props) {
