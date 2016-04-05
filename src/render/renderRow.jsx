@@ -60,7 +60,7 @@ module.exports = function renderRow(props, data, index, fn){
         showMenu: props.showMenu,
 
         _onClick: this? this.handleRowClick: null,
-        onCellClick: props.onCellClick,
+        onSelectedCellChange: props.onSelectedCellChange,
         selectedCells: props.selectedCells,
         selectCells: props.selectCells
     }

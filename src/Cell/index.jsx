@@ -130,8 +130,8 @@ module.exports = React.createClass({
             rowIndex: this.props.rowIndex
         };
 
-        if (this.props.onCellClick && typeof this.props.onCellClick === 'function'){
-            this.props.onCellClick(cell);
+        if (this.props.onSelectedCellChange && typeof this.props.onSelectedCellChange === 'function'){
+            this.props.onSelectedCellChange(cell);
         }
     }
 })

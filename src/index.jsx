@@ -266,8 +266,8 @@ module.exports = React.createClass({
     },
 
     onDropColumn: function(index, dropIndex){
-        if (typeof this.props.onColumnOrderChange === 'function' && typeof this.props.onCellClick === 'function' && this.props.selectCells) {
-            this.props.onCellClick(null);
+        if (typeof this.props.onColumnOrderChange === 'function' && typeof this.props.onSelectedCellChange === 'function' && this.props.selectCells) {
+            this.props.onSelectedCellChange(null);
         }
 
         ;(this.props.onColumnOrderChange || emptyFn)(index, dropIndex)
@@ -372,7 +372,7 @@ module.exports = React.createClass({
             menuColumn       : state.menuColumn,
             columnMenuFactory: props.columnMenuFactory,
             selectCells      : props.selectCells,
-            onCellClick      : props.onCellClick
+            onSelectedCellChange      : props.onSelectedCellChange
 
         })
     },

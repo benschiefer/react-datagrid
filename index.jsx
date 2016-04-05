@@ -256,9 +256,9 @@ var App = React.createClass({
                 }}
                 onDataSourceLoaded={this.onLoaded}
                 columns={columns}
-                xonCellClick={this.onCellClick}
+                xonSelectedCellChange={this.onSelectedCellChange}
                 xselectCells={true}
-                xselectedCells={this.selectedCell}/>
+                xselectedCells={this.selectedCells}/>
         </div>
     },
 
@@ -272,13 +272,13 @@ var App = React.createClass({
         this.setState({})
     },
 
-    onCellClick: function(cell){
+    onSelectedCellChange: function(cell){
         if (cell === null){
-            this.selectedCell = [];
+            this.selectedCells = [];
             return;
         }
 
-        this.selectedCell = [cell];
+        this.selectedCells = [cell];
     },
 
     onPageSizeChange: function(value, props) {

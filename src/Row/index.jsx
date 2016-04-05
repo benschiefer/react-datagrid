@@ -160,7 +160,7 @@ module.exports = React.createClass({
             textPadding  : props.cellPadding,
             renderCell   : props.renderCell,
             renderText   : props.renderText,
-            onCellClick  : props.onCellClick,
+            onSelectedCellChange  : props.onSelectedCellChange,
             selectedCells: props.selectedCells
         }
 
