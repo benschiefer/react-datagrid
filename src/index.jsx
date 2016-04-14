@@ -88,6 +88,7 @@ module.exports = React.createClass({
     propTypes: {
         loading          : React.PropTypes.bool,
         virtualRendering : React.PropTypes.bool,
+        virtualColumnRendering : React.PropTypes.bool,
 
         //specify false if you don't want any column to be resizable
         resizableColumns : React.PropTypes.bool,
@@ -169,6 +170,7 @@ module.exports = React.createClass({
         return {
             startIndex: 0,
             scrollLeft: 0,
+            startColIndex: 0,
             scrollTop : 0,
             menuColumn: null,
             defaultSelected: defaultSelected,
@@ -183,11 +185,26 @@ module.exports = React.createClass({
     },
 
     handleScrollLeft: function(scrollLeft){
+        var props = this.p
+        var state = this.state
 
-        this.setState({
-            scrollLeft: scrollLeft,
-            menuColumn: null
-        })
+        state.scrollLeft = scrollLeft;
+        state.menuColumn = null;
+
+        if (props.virtualColumnRendering){
+            var startOffset = scrollLeft;
+
+            // get start column index
+            for (var i = 0; i < props.columns.length; i++){
+                startOffset -= props.columns[i].width;
+                if (startOffset <= 0){
+                    state.startColIndex = i;
+                    break;
+                }
+            }
+        }
+
+        this.setState(state);
     },
 
     handleScrollTop: function(scrollTop){
@@ -235,6 +252,25 @@ module.exports = React.createClass({
         }
 
         this.setState(state)
+    },
+
+    getRenderEndColIndex: function(props, state){
+        var endColIndex
+        if (props.virtualColumnRendering){
+            var endOffset = props.totalColumnWidth - (props.style.width + state.scrollLeft);
+
+            // get end column index
+            for (var i = props.columns.length - 1; i >= 0; i--){
+                endOffset -= props.columns[i].width;
+                if (props.columns[i-1].width && endOffset <= props.columns[i-1].width){
+                    endColIndex = i;
+                    break;
+                }
+            }
+
+        }
+
+        return endColIndex;
     },
 
     getRenderEndIndex: function(props, state){
@@ -372,7 +408,11 @@ module.exports = React.createClass({
             menuColumn       : state.menuColumn,
             columnMenuFactory: props.columnMenuFactory,
             selectCells      : props.selectCells,
-            onSelectedCellChange      : props.onSelectedCellChange
+            onSelectedCellChange  : props.onSelectedCellChange,
+            startColIndex: state.startColIndex,
+            endColIndex: props.virtualColumnRendering ? this.getRenderEndColIndex(props, state): null
+
+
 
         })
     },
@@ -520,6 +560,7 @@ module.exports = React.createClass({
 
     prepareWrapper: function(props, state){
         var virtualRendering = props.virtualRendering
+        var virtualColumnRendering = props.virtualColumnRendering
 
         var data       = props.data
         var scrollTop  = state.scrollTop
@@ -527,6 +568,9 @@ module.exports = React.createClass({
         var endIndex   = virtualRendering?
                             this.getRenderEndIndex(props, state):
                             0
+
+        var startColIndex = state.startColIndex
+        var endColIndex = virtualColumnRendering ? this.getRenderEndColIndex(props, state): null
 
         var renderCount = virtualRendering?
                             endIndex + 1 - startIndex:
@@ -567,9 +611,11 @@ module.exports = React.createClass({
             scrollTop       : scrollTop,
             topOffset       : state.topOffset,
             startIndex      : startIndex,
+            startColIndex   : startColIndex,
             totalLength     : totalLength,
             renderCount     : renderCount,
             endIndex        : endIndex,
+            endColIndex     : endColIndex,
 
             allColumns      : props.columns,
 
