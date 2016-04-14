@@ -262,7 +262,7 @@ module.exports = React.createClass({
             // get end column index
             for (var i = props.columns.length - 1; i >= 0; i--){
                 endOffset -= props.columns[i].width;
-                if (props.columns[i-1].width && endOffset <= props.columns[i-1].width){
+                if (props.columns[i-1].width && endOffset < props.columns[i-1].width){
                     endColIndex = i;
                     break;
                 }
