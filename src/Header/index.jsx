@@ -114,8 +114,8 @@ module.exports = React.createClass({
 
     render: function() {
         var props = this.prepareProps(this.props)
-        var cols = !isNaN(props.endColIndex) ? props.columns.slice(props.startColIndex, props.endColIndex + 1) : props.columns
-        var scrollLeft = !isNaN(props.endColIndex) ? 0 : props.scrollLeft
+        var cols = props.virtualColumnRendering ? props.columns.slice(props.startColIndex, props.endColIndex + 1) : props.columns
+        var scrollLeft = props.virtualColumnRendering ? 0 : props.scrollLeft
         var cells = cols
                         .map(this.renderCell.bind(this, props, this.state))
 

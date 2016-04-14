@@ -39,7 +39,7 @@ module.exports = React.createClass({
 
     render: function() {
         var props = this.prepareProps(this.props)
-        var cols = !isNaN(props.endColIndex) ? props.columns.slice(props.startColIndex, props.endColIndex + 1) : props.columns
+        var cols = props.virtualColumnRendering ? props.columns.slice(props.startColIndex, props.endColIndex + 1) : props.columns
 
         var cells = props.children || cols
                 .map(this.renderCell.bind(this, this.props))

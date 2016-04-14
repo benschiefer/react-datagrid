@@ -410,10 +410,8 @@ module.exports = React.createClass({
             selectCells      : props.selectCells,
             onSelectedCellChange  : props.onSelectedCellChange,
             startColIndex: state.startColIndex,
-            endColIndex: props.virtualColumnRendering ? this.getRenderEndColIndex(props, state): null
-
-
-
+            endColIndex: props.virtualColumnRendering ? this.getRenderEndColIndex(props, state): null,
+            virtualColumnRendering: props.virtualColumnRendering
         })
     },
 
