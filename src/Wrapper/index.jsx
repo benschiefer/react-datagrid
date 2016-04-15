@@ -28,7 +28,7 @@ module.exports = React.createClass({
     },
 
     componentDidMount: function(){
-        this.setState({height: this.getDOMNode().offsetHeight});
+        this.setState({height: React.findDOMNode(this).offsetHeight});
         window.addEventListener('resize', this._handleResize);
     },
 
@@ -159,7 +159,7 @@ module.exports = React.createClass({
     },
 
     _handleResize: function() {
-        this.setState({height: this.getDOMNode().offsetHeight});
+        this.setState({height: React.findDOMNode(this).offsetHeight});
     },
 
     _onEmptyRowClick: function(e) {
