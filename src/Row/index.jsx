@@ -157,7 +157,7 @@ module.exports = React.createClass({
 
             data         : props.data,
             columns      : columns,
-            index        : index,
+            index        : column.index,
             rowIndex     : props.index,
             textPadding  : props.cellPadding,
             renderCell   : props.renderCell,
