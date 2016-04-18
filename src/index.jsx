@@ -129,6 +129,7 @@ module.exports = React.createClass({
     componentDidMount: function(){
         window.addEventListener('click', this.windowClickListener = this.onWindowClick)
         // this.checkRowHeight(this.props)
+        this.checkWidth(this.props);
     },
 
     componentWillUnmount: function(){
@@ -152,6 +153,22 @@ module.exports = React.createClass({
     //         this.updateStartIndex(props, undefined, config)
     //     }
     // },
+
+    checkWidth: function(props){
+        if (!props.virtualColumnRendering){
+            return;
+        } else {
+            if (!props.style.width){
+                console.warn('Virtual column rendering requires grid width to be defined.', 'Make sure your style prop includes a width.');
+            }
+            for(var i = 0; i < props.columns.length; i++){
+                if (!props.columns[i].width){
+                    console.warn('Virtual column rendering requires a width to be defined for all columns.', props.columns[i]);
+                    break;
+                }
+            }
+        }
+    },
 
     onWindowClick: function(event){
         if (this.state.menu){
@@ -255,6 +272,10 @@ module.exports = React.createClass({
     },
 
     getRenderEndColIndex: function(props, state){
+        if(!props.style.width){
+            return null;
+        }
+
         var endColIndex
         var endOffset = props.totalColumnWidth - (props.style.width + state.scrollLeft);
 
