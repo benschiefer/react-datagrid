@@ -51,8 +51,7 @@ var columns = [
             color: 'red',
             textAlign: 'right'
         },
-        width: 150,
-        cellPadding: '20px'
+        width: 150
     },
     {
         name: 'id',
@@ -69,8 +68,7 @@ var columns = [
     },
     {
         name: 'email',
-        minWidth: 200,
-        flex: 1
+        width: 200
     },
     {
         name: 'lastName',
@@ -196,7 +194,6 @@ var App = React.createClass({
             this.setState({})
         }.bind(this)
 
-        console.log(selected);
 
         var ds = function(q){
             return 'http://5.101.99.47:8090/1000'
@@ -214,51 +211,52 @@ var App = React.createClass({
 
         return <div >
 
-            <button onClick={this.clear}>clear</button>
+            {/*<button onClick={this.clear}>clear</button>
             <button onClick={this.set}>set</button>
-            <input defaultValue="test"/>
+            <input defaultValue="test"/>*/}
             <DataGrid
-                onFilter={filter}
-                liveFilter={true}
+                XonFilter={filter}
+                XliveFilter={true}
                 defaultSelected={{451: true, 452: true}}
                 onSelectionChange={onSelectionChange}
-                xonColumnVisibilityChange={this.onColumnChange}
+                XonColumnVisibilityChange={this.onColumnChange}
                 onColumnOrderChange={this.onColumnOrderChange}
                 onColumnResize={this.onColumnResize}
-                sortInfo={SORT_INFO}
-                xgroupBy={groupBy}
-                rowStyle={rowStyle}
-                rowClassName={blue}
-                xrowFactory={f}
+                XsortInfo={SORT_INFO}
+                XgroupBy={groupBy}
+                XrowStyle={rowStyle}
+                XrowClassName={blue}
+                XrowFactory={f}
                 onSortChange={this.handleSortChange}
                 onRowClick={rowClick}
-                xscrollBy={5}
+                XscrollBy={5}
                 idProperty='id'
-                style={{border: '1px solid gray', height: 500, margin: 10}}
+                style={{border: '1px solid gray', height: 500, width: 600, margin: 10}}
                 showCellBorders={true}
                 rowHeight={ROW_HEIGHT}
                 virtualRendering={true}
-                xemptyText='testing'
+                virtualColumnRendering={true}
+                XemptyText='testing'
                 cellPadding={'0px 5px'}
-                xpageSize={PAGE_SIZE}
-                xdata={data}
-                pageSize={PAGE_SIZE}
+                XpageSize={PAGE_SIZE}
+                Xdata={data}
+                XpageSize={PAGE_SIZE}
                 dataSource={data}
                 page={PAGE}
                 onPageSizeChange={this.onPageSizeChange}
                 onPageChange={this.onPageChange}
                 reload={RELOAD}
-                pagination={true}
-                paginationToolbarProps={{
-                    xshowRefreshIcon: false,
-                    xshowPageSize: false,
-                    xshowSeparators: false
+                Xpagination={true}
+                XpaginationToolbarProps={{
+                    XshowRefreshIcon: false,
+                    XshowPageSize: false,
+                    XshowSeparators: false
                 }}
                 onDataSourceLoaded={this.onLoaded}
                 columns={columns}
-                xonSelectedCellChange={this.onSelectedCellChange}
-                xselectCells={true}
-                xselectedCells={this.selectedCells}/>
+                XonSelectedCellChange={this.onSelectedCellChange}
+                XselectCells={true}
+                XselectedCells={this.selectedCells}/>
         </div>
     },
 

@@ -62,7 +62,11 @@ module.exports = function renderRow(props, data, index, fn){
         _onClick: this? this.handleRowClick: null,
         onSelectedCellChange: props.onSelectedCellChange,
         selectedCells: props.selectedCells,
-        selectCells: props.selectCells
+        selectCells: props.selectCells,
+        startColIndex: props.startColIndex,
+        endColIndex: props.endColIndex,
+        scrollLeft:props.scrollLeft,
+        virtualColumnRendering: props.virtualColumnRendering
     }
 
     var style

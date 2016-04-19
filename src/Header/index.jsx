@@ -114,14 +114,19 @@ module.exports = React.createClass({
 
     render: function() {
         var props = this.prepareProps(this.props)
-
-        var cells = props.columns
+        var cols = props.virtualColumnRendering && props.endColIndex !== null ?
+                    props.columns.slice(props.startColIndex, props.endColIndex + 1) :
+                    props.columns
+        var scrollLeft = props.virtualColumnRendering && props.endColIndex !== null ?
+                            (props.columns.length === props.endColIndex + 1 ? props.columns[props.endColIndex].width : 0) :
+                            props.scrollLeft
+        var cells = cols
                         .map(this.renderCell.bind(this, props, this.state))
 
         var style = normalize(props.style)
         var headerStyle = normalize({
             paddingRight: props.scrollbarSize,
-            transform   : 'translate3d(' + -props.scrollLeft + 'px, ' + -props.scrollTop + 'px, 0px)'
+            transform   : 'translate3d(' + -scrollLeft + 'px, ' + -props.scrollTop + 'px, 0px)'
         })
 
         return (
@@ -207,7 +212,7 @@ module.exports = React.createClass({
                 key={column.name}
                 textPadding={props.cellPadding}
                 columns={props.columns}
-                index={index}
+                index={column.index}
                 className={className}
                 style={style}
                 text={text}

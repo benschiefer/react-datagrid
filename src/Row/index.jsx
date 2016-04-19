@@ -39,7 +39,9 @@ module.exports = React.createClass({
 
     render: function() {
         var props = this.prepareProps(this.props)
-        var cells = props.children || props.columns
+        var cols = props.virtualColumnRendering && props.endColIndex !== null ? props.columns.slice(props.startColIndex, props.endColIndex + 1) : props.columns
+
+        var cells = props.children || cols
                 .map(this.renderCell.bind(this, this.props))
 
         return <div {...props}>{cells}</div>
@@ -155,7 +157,7 @@ module.exports = React.createClass({
 
             data         : props.data,
             columns      : columns,
-            index        : index,
+            index        : column.index,
             rowIndex     : props.index,
             textPadding  : props.cellPadding,
             renderCell   : props.renderCell,
