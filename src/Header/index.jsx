@@ -13,7 +13,6 @@ var setupColumnDrag   = require('./setupColumnDrag')
 var setupColumnResize = require('./setupColumnResize')
 
 var normalize   = require('react-style-normalizer')
-var EVENT_NAMES = require('react-event-names')
 
 function emptyFn(){}
 
@@ -204,8 +203,8 @@ module.exports = React.createClass({
 
         var events = {}
 
-        events[EVENT_NAMES.onMouseDown] = this.handleMouseDown.bind(this, column)
-        events[EVENT_NAMES.onMouseUp] = this.handleMouseUp.bind(this, column)
+        events.onMouseDown = this.handleMouseDown.bind(this, column)
+        events.onMouseUp = this.handleMouseUp.bind(this, column)
 
         return (
             <Cell
