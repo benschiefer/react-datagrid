@@ -4,8 +4,6 @@ var React  = require('react')
 var assign = require('object-assign')
 var normalize = require('react-style-normalizer')
 
-var EVENT_NAMES = require('react-event-names')
-
 var TEXT_ALIGN_2_JUSTIFY = {
     right : 'flex-end',
     center: 'center'
@@ -95,11 +93,10 @@ module.exports = React.createClass({
         copyProps(cellProps, props, [
             'onMouseOver',
             'onMouseOut',
-            'onClick'
-        ].concat([
-                EVENT_NAMES.onMouseDown,
-                EVENT_NAMES.onMouseUp
-            ]))
+            'onClick',
+            'onMouseDown',
+            'onMouseUp'
+        ])
 
         var innerStyle = props.innerStyle
 
