@@ -140,7 +140,7 @@ module.exports = React.createClass({
                 }
 
                 emptyRows.push(
-                    <div key={i} className={rowClass} style={rowHeight} onClick={this._onEmptyRowClick}>
+                    <div key={offset} className={rowClass} style={rowHeight} onClick={this._onEmptyRowClick}>
                         {emptyCells}
                     </div>
                 );
