@@ -135,12 +135,12 @@ module.exports = React.createClass({
                     cellWidth = this.props.columns[j].width ? {width: this.props.columns[j].width, minWidth: this.props.columns[j].width} : {minWidth: this.props.columns[j].minWidth, WebkitFlex: 1, msFlex: 1, flex: 1};
 
                     emptyCells.push(
-                        <div className={cellClass} style={cellWidth} />
+                        <div key={j} className={cellClass} style={cellWidth} />
                     );
                 }
 
                 emptyRows.push(
-                    <div className={rowClass} style={rowHeight} onClick={this._onEmptyRowClick}>
+                    <div key={i} className={rowClass} style={rowHeight} onClick={this._onEmptyRowClick}>
                         {emptyCells}
                     </div>
                 );
