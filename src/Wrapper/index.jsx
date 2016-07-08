@@ -28,7 +28,7 @@ module.exports = React.createClass({
     },
 
     componentDidMount: function(){
-        this.setState({height: this.getDOMNode().offsetHeight});
+        this.setState({height: React.findDOMNode(this).offsetHeight});
         window.addEventListener('resize', this._handleResize);
     },
 
@@ -116,7 +116,7 @@ module.exports = React.createClass({
 
             for( var i = 0; i < numEmptyRows; i++ ){
                 emptyCells = [];
-                rowClass = 'z-row';
+                rowClass = 'z-row z-empty-row';
                 offset = (this.props.renderCount - 1) + i;
 
                 rowClass += (offset % 2 ? ' z-odd' : ' z-even');
@@ -135,12 +135,12 @@ module.exports = React.createClass({
                     cellWidth = this.props.columns[j].width ? {width: this.props.columns[j].width, minWidth: this.props.columns[j].width} : {minWidth: this.props.columns[j].minWidth, WebkitFlex: 1, msFlex: 1, flex: 1};
 
                     emptyCells.push(
-                        <div className={cellClass} style={cellWidth} />
+                        <div key={j} className={cellClass} style={cellWidth} />
                     );
                 }
 
                 emptyRows.push(
-                    <div className={rowClass} style={rowHeight} onClick={this._onEmptyRowClick}>
+                    <div key={offset} className={rowClass} style={rowHeight} onClick={this._onEmptyRowClick}>
                         {emptyCells}
                     </div>
                 );
@@ -159,7 +159,7 @@ module.exports = React.createClass({
     },
 
     _handleResize: function() {
-        this.setState({height: this.getDOMNode().offsetHeight});
+        this.setState({height: React.findDOMNode(this).offsetHeight});
     },
 
     _onEmptyRowClick: function(e) {

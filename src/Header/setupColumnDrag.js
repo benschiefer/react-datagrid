@@ -37,12 +37,19 @@ module.exports = function(header, props, column, event){
     var dragColumnIndex
     var columnData
     var shiftRegion
+    var x = event.clientX;
+    var y = event.clientY;
+    var preventBadDrag;
 
     DragHelper(event, {
 
         constrainTo: headerRegion.expand({ top: true, bottom: true}),
 
         onDragStart: function(event, config){
+            if (event.clientX === x && event.clientY === y){
+                preventBadDrag = true;
+                return;
+            }
 
             var columnHeaders = headerNode.querySelectorAll('.' + props.cellClassName)
 
@@ -70,6 +77,10 @@ module.exports = function(header, props, column, event){
 
         },
         onDrag: function(event, config){
+            if (preventBadDrag){
+                return;
+            }
+            
             var diff = config.diff.left
             var directionSign = diff < 0? -1: 1
             var state = {
