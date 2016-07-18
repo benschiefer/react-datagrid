@@ -5,6 +5,7 @@ require('./index.styl')
 var Guid = require('guid')
 var sorty = require('sorty')
 var React = require('react')
+var ReactDOM = require('react-dom')
 var DataGrid = require('./src')
 var faker = window.faker = require('faker');
 var preventDefault = require('./src/utils/preventDefault')
@@ -290,6 +291,6 @@ var App = React.createClass({
     }
 })
 
-React.render((
+ReactDOM.render((
     <App />
 ), document.getElementById('content'))

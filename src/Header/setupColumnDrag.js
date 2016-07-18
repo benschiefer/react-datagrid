@@ -1,6 +1,7 @@
 'use strict';
 
 var Region     = require('region')
+var ReactDOM   = require('react-dom')
 var DragHelper = require('drag-helper')
 
 function range(start, end){
@@ -31,7 +32,7 @@ module.exports = function(header, props, column, event){
 
     event.preventDefault()
 
-    var headerNode   = header.getDOMNode()
+    var headerNode   = ReactDOM.findDOMNode(header)
     var headerRegion = Region.from(headerNode)
     var dragColumn = column
     var dragColumnIndex
@@ -80,7 +81,7 @@ module.exports = function(header, props, column, event){
             if (preventBadDrag){
                 return;
             }
-            
+
             var diff = config.diff.left
             var directionSign = diff < 0? -1: 1
             var state = {
