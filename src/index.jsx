@@ -484,11 +484,12 @@ module.exports = React.createClass({
             menu   : this.state.menu
         }
 
-        var loadMask
+        /* Commenting out unused loader to prevent react warnings. */
+        // var loadMask
 
-        if (props.loadMaskOverHeader){
-            loadMask = <LoadMask visible={props.loading} />
-        }
+        // if (props.loadMaskOverHeader){
+        //     loadMask = <LoadMask visible={props.loading} />
+        // }
 
         var paginationToolbar
 
@@ -538,7 +539,9 @@ module.exports = React.createClass({
                     {resizeProxy}
                 </div>
 
-                {loadMask}
+                {/* Commenting out unused loader to prevent react warnings.
+                    loadMask
+                */}
                 {renderMenu(menuProps)}
                 {bottomToolbar}
             </div>

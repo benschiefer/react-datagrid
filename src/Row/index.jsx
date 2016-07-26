@@ -65,6 +65,8 @@ module.exports = React.createClass({
         delete props.scrollLeft
         delete props.virtualColumnRendering
         delete props.mouseOverClassName
+        delete props.defaultClassName
+        delete props.defaultStyle
 
         return <div {...props}>{cells}</div>
     },

@@ -531,11 +531,12 @@ return /******/ (function(modules) { // webpackBootstrap
 	            menu: this.state.menu
 	        };
 
-	        var loadMask;
+	        /* Commenting out unused loader to prevent react warnings. */
+	        // var loadMask
 
-	        if (props.loadMaskOverHeader) {
-	            loadMask = React.createElement(LoadMask, { visible: props.loading });
-	        }
+	        // if (props.loadMaskOverHeader){
+	        //     loadMask = <LoadMask visible={props.loading} />
+	        // }
 
 	        var paginationToolbar;
 
@@ -587,7 +588,6 @@ return /******/ (function(modules) { // webpackBootstrap
 	                footer,
 	                resizeProxy
 	            ),
-	            loadMask,
 	            renderMenu(menuProps),
 	            bottomToolbar
 	        );
@@ -1247,6 +1247,9 @@ return /******/ (function(modules) { // webpackBootstrap
 	        onColumnResize(firstCol, firstSize, secondCol, secondSize);
 	    }
 	});
+	/* Commenting out unused loader to prevent react warnings.
+	   loadMask
+	*/
 	/* WEBPACK VAR INJECTION */}.call(exports, (function() { return this; }())))
 
 /***/ },
@@ -33005,6 +33008,8 @@ return /******/ (function(modules) { // webpackBootstrap
 	        delete props.scrollLeft;
 	        delete props.virtualColumnRendering;
 	        delete props.mouseOverClassName;
+	        delete props.defaultClassName;
+	        delete props.defaultStyle;
 
 	        return React.createElement(
 	            'div',
