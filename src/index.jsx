@@ -3,6 +3,7 @@
 require('es6-promise').polyfill()
 
 var React    = require('react')
+var ReactDOM    = require('react-dom')
 var assign   = require('object-assign')
 var LoadMask = require('react-load-mask')
 var Region   = require('region')
@@ -483,11 +484,12 @@ module.exports = React.createClass({
             menu   : this.state.menu
         }
 
-        var loadMask
+        /* Commenting out unused loader to prevent react warnings. */
+        // var loadMask
 
-        if (props.loadMaskOverHeader){
-            loadMask = <LoadMask visible={props.loading} />
-        }
+        // if (props.loadMaskOverHeader){
+        //     loadMask = <LoadMask visible={props.loading} />
+        // }
 
         var paginationToolbar
 
@@ -537,7 +539,9 @@ module.exports = React.createClass({
                     {resizeProxy}
                 </div>
 
-                {loadMask}
+                {/* Commenting out unused loader to prevent react warnings.
+                    loadMask
+                */}
                 {renderMenu(menuProps)}
                 {bottomToolbar}
             </div>
@@ -1167,7 +1171,7 @@ module.exports = React.createClass({
 
     onColumnResizeDragStart: function(config){
 
-        var domNode = this.getDOMNode()
+        var domNode = ReactDOM.findDOMNode(this)
         var region  = Region.from(domNode)
 
         this.resizeProxyLeft = config.resizeProxyLeft - region.left
@@ -1194,7 +1198,7 @@ module.exports = React.createClass({
             setTimeout(function(){
                 //FF needs this, since it does not trigger scroll event when scrollbar dissapears
                 //so we might end up with grid content not visible (to the left)
-                var domNode = React.findDOMNode(horizScrollbar)
+                var domNode = ReactDOM.findDOMNode(horizScrollbar)
                 if (domNode && !domNode.scrollLeft){
                     this.handleScrollLeft(0)
                 }

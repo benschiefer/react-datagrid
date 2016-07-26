@@ -71,14 +71,15 @@
     "react-menus": "^1.1.1",
     "react-simple-toolbar": "^1.0.5",
     "react-style-normalizer": "^1.2.0",
-    "react-virtual-scroller": "talarico43/react-virtual-scroller",
+    "react-virtual-scroller": "vinayakpatil/react-virtual-scroller#story/HAD-4431_HAD-5353_React15_Upgrade",
     "region": "^2.1.2",
     "region-align": "^2.1.2",
     "ustring": "^1.4.1",
     "whatwg-fetch": "^0.7.0"
   },
   "peerDependencies": {
-    "react": ">=0.13.0"
+    "react": ">=0.14.0 || >=15.0.0",
+    "react-dom": ">=0.14.0 || >=15.0.0"
   },
   "author": "ZippyUI <contact@zippyui.com>",
   "contributors": [],
