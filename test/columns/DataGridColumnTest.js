@@ -23,7 +23,7 @@ var generateMockData = testUtils.generateMockData
 
 describe('DataGrid Test Suite - Columns', function(){
 
-    it('check column visibility by options',function(done) {
+    xit('check column visibility by options',function(done) {
 
         var data = generateMockData({type : 'local', len : 1})
 
@@ -115,7 +115,7 @@ describe('DataGrid Test Suite - Columns', function(){
         done()
     })
 
-    it('check column width set by props',function(done) {
+    xit('check column width set by props',function(done) {
 
         var data = generateMockData({type : 'local', len : 1})
         var columns = [
@@ -150,7 +150,7 @@ describe('DataGrid Test Suite - Columns', function(){
         done()
     })
 
-    it('check dynamic column visibility by options',function(done) {
+    xit('check dynamic column visibility by options',function(done) {
 
         var data = generateMockData({type : 'local', len : 1})
         var columns = [
@@ -198,7 +198,7 @@ describe('DataGrid Test Suite - Columns', function(){
 
     })
 
-    it('check custom column rendering function works',function() {
+    xit('check custom column rendering function works',function() {
 
         var data = generateMockData({type : 'local', len : 10})
         var columns = [
@@ -249,7 +249,7 @@ function checkColVisibility(data, columns, expectedHeaders, visible) {
     headers.should.eql(expectedHeaders)
 
     var tableDom = findWithClass(table,TABLE_CLASS)
-    
+
     var cellTexts = tryWithClass(tableDom,CELLTEXT_CLASS)
     var cellContents = []
     cellTexts.map(function(cell) {
