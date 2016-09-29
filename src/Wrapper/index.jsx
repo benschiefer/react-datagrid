@@ -1,6 +1,7 @@
 'use strict';
 
 var React    = require('react')
+var ReactDOM    = require('react-dom')
 var assign   = require('object-assign')
 var Scroller = require('react-virtual-scroller')
 
@@ -28,7 +29,7 @@ module.exports = React.createClass({
     },
 
     componentDidMount: function(){
-        this.setState({height: React.findDOMNode(this).offsetHeight});
+        this.setState({height: ReactDOM.findDOMNode(this).offsetHeight});
         window.addEventListener('resize', this._handleResize);
     },
 
@@ -159,7 +160,7 @@ module.exports = React.createClass({
     },
 
     _handleResize: function() {
-        this.setState({height: React.findDOMNode(this).offsetHeight});
+        this.setState({height: ReactDOM.findDOMNode(this).offsetHeight});
     },
 
     _onEmptyRowClick: function(e) {

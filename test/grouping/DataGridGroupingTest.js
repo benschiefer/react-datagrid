@@ -25,7 +25,7 @@ var generateMockData = testUtils.generateMockData
 
 describe('DataGrid Test Suite -  Grouping',function() {
 
-	it('check groupBy prop works',function() {
+	xit('check groupBy prop works',function() {
 
 		var data = generateMockData({type : 'local',len : 10})
 		// prepare data for grouping
@@ -59,7 +59,7 @@ describe('DataGrid Test Suite -  Grouping',function() {
         var groupHeaders = tryWithClass(table,GROUP_ROW_CLASS)
         groupHeaders.length.should.equal(2)
         React.findDOMNode(groupHeaders[0]).textContent.should.equal('India')
-        React.findDOMNode(groupHeaders[1]).textContent.should.equal('USA') 
+        React.findDOMNode(groupHeaders[1]).textContent.should.equal('USA')
 
         var groupedRows = tryWithClass(table,GROUPED_ROW_CLASS)
         groupedRows.length.should.equal(10)
