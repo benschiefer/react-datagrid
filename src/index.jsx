@@ -297,6 +297,24 @@ module.exports = React.createClass({
         return endColIndex;
     },
 
+    getLeftOffset: function(props, startColIndex, endColIndex) {
+        var visibleColumnsWidth = 0,
+            leftOffset = 0,
+            counter;
+
+        if (endColIndex !== null && props.columns.length === endColIndex + 1) {
+            for (counter = startColIndex; counter <= endColIndex; counter++) {
+                visibleColumnsWidth += props.columns[counter].width;
+            }
+
+            if (visibleColumnsWidth && props.style.width) {
+                leftOffset = visibleColumnsWidth - props.style.width;
+            }
+        }
+
+        return leftOffset;
+    },
+
     getRenderEndIndex: function(props, state){
         var startIndex = state.startIndex
         var rowCount   = props.rowCountBuffer
@@ -400,6 +418,7 @@ module.exports = React.createClass({
 
         var allColumns = props.columns
         var columns    = getVisibleColumns(props, state)
+        var endColIndex = props.virtualColumnRendering ? this.getRenderEndColIndex(props, state) : null;
 
         return (props.headerFactory || HeaderFactory)({
             scrollLeft       : state.scrollLeft,
@@ -434,7 +453,8 @@ module.exports = React.createClass({
             selectCells      : props.selectCells,
             onSelectedCellChange  : props.onSelectedCellChange,
             startColIndex: state.startColIndex,
-            endColIndex: props.virtualColumnRendering ? this.getRenderEndColIndex(props, state): null,
+            endColIndex: endColIndex,
+            leftOffset: props.virtualColumnRendering ? this.getLeftOffset(props, state.startColIndex, endColIndex) : 0,
             virtualColumnRendering: props.virtualColumnRendering
         })
     },
@@ -641,6 +661,7 @@ module.exports = React.createClass({
             renderCount     : renderCount,
             endIndex        : endIndex,
             endColIndex     : endColIndex,
+            leftOffset      : props.virtualColumnRendering ? this.getLeftOffset(props, startColIndex, endColIndex) : 0,
 
             allColumns      : props.columns,
 
