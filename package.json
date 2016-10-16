@@ -71,7 +71,7 @@
     "react-menus": "^1.1.1",
     "react-simple-toolbar": "^1.0.5",
     "react-style-normalizer": "^1.2.0",
-    "react-virtual-scroller": "talarico43/react-virtual-scroller#1.1.4",
+    "react-virtual-scroller": "InfoGroupInteractive/react-virtual-scroller#1.1.5",
     "region": "^2.1.2",
     "region-align": "^2.1.2",
     "ustring": "^1.4.1",

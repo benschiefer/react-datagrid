@@ -116,9 +116,9 @@ module.exports = React.createClass({
         var cols = props.virtualColumnRendering && props.endColIndex !== null ?
                     props.columns.slice(props.startColIndex, props.endColIndex + 1) :
                     props.columns
-        var scrollLeft = props.virtualColumnRendering && props.endColIndex !== null ?
-                            (props.columns.length === props.endColIndex + 1 ? props.columns[props.endColIndex].width : 0) :
-                            props.scrollLeft
+        var scrollLeft = props.virtualColumnRendering ?
+                            (props.leftOffset || 0) :
+                            props.scrollLeft;
         var cells = cols
                         .map(this.renderCell.bind(this, props, this.state))
 
